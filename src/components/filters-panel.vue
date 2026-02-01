@@ -15,14 +15,8 @@
             <div v-if="expanded" class="filters-panel__fields d-flex flex-column ga-4">
                 <span class="text-subtitle-1">Фильтры</span>
 
-                <VTextField v-model="id" rounded="t-lg" label="ID" hide-details @keyup.enter="$emit('update-id', id)" />
-                <VTextField
-                    v-model="name"
-                    rounded="t-lg"
-                    label="Фамилия пациента"
-                    hide-details
-                    @keyup.enter="$emit('update-name', name)"
-                />
+                <VTextField v-model="id" rounded="t-lg" label="ID" hide-details @keyup.enter="apply" />
+                <VTextField v-model="name" rounded="t-lg" label="Фамилия пациента" hide-details @keyup.enter="apply" />
                 <VSelect v-model="customer" rounded="t-lg" :items="customers" label="Заказчик" hide-details clearable />
             </div>
         </TransitionExpand>
@@ -60,12 +54,16 @@ export default defineComponent({
     },
 
     methods: {
+        apply() {
+            this.$emit("update-id", this.id);
+            this.$emit("update-name", this.name);
+        },
         clear() {
             this.id = "";
             this.name = "";
             this.customer = null;
-            this.$emit("update-id", "");
-            this.$emit("update-name", "");
+
+            this.apply();
         },
     },
 });
