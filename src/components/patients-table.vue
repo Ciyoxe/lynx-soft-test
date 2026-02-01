@@ -1,6 +1,6 @@
 <template>
     <VSheet elevation="3" rounded="xl">
-        <VTable fixed-header class="table">
+        <VTable fixed-header class="patients-table__table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -21,7 +21,7 @@
                     :style="{ backgroundColor: patient.color ?? '#0000' }"
                 >
                     <td>{{ patient.id }}</td>
-                    <td>{{ patient.registrationDate.toLocaleDateString("RU-ru") }}</td>
+                    <td>{{ patient.registrationDate.toLocaleDateString("ru-RU") }}</td>
                     <td>{{ patient.name }}</td>
                     <td>{{ patient.customer }}</td>
                 </tr>
@@ -50,7 +50,7 @@ export default defineComponent({
 </script>
 
 <style lang="css" scoped>
-.table {
+.patients-table__table {
     height: calc(100dvh - 135px);
     min-height: 500px;
 }

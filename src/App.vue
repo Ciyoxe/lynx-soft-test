@@ -1,14 +1,14 @@
 <template>
-    <main class="d-flex flex-column ga-3">
+    <main class="app d-flex flex-column ga-3">
         <DateSelect :min="minDate" :max="maxDate" @update-from="filterFrom = $event" @update-to="filterTo = $event" />
-        <div class="container d-flex ga-3">
+        <div class="app__container d-flex ga-3">
             <FiltersPanel
                 :customers="customers"
                 @update-id="filterId = $event"
                 @update-name="filterName = $event"
                 @update-customer="filterCustomer = $event"
             />
-            <PatientsTable class="table" :patients="filteredPatients" :has-filters="hasActiveFilter" />
+            <PatientsTable class="app__table" :patients="filteredPatients" :has-filters="hasActiveFilter" />
         </div>
     </main>
 </template>
@@ -70,16 +70,16 @@ export default defineComponent({
 </script>
 
 <style lang="css" scoped>
-main {
+.app {
     padding: 16px;
     min-height: 100dvh;
 }
-.table {
+.app__table {
     flex: 1;
 }
 
 @media (width < 1024px) {
-    .container {
+    .app__container {
         flex-direction: column;
     }
 }

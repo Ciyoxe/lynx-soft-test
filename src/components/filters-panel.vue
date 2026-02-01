@@ -1,19 +1,28 @@
 <template>
-    <VSheet :class="['main-panel d-flex pa-1', { expanded }]" elevation="3" rounded="xl">
-        <div class="controls d-flex ga-1 pa-1">
+    <VSheet :class="['filters-panel d-flex pa-1', { 'filters-panel--expanded': expanded }]" elevation="3" rounded="xl">
+        <div class="filters-panel__controls d-flex ga-1 pa-1">
             <VBtn icon variant="tonal" @click="expanded = !expanded">
-                <VIcon icon="mdi-chevron-right" :class="['icon', { expanded }]" />
+                <VIcon
+                    icon="mdi-chevron-right"
+                    :class="['filters-panel__icon', { 'filters-panel__icon--expanded': expanded }]"
+                />
             </VBtn>
             <VBtn icon variant="tonal" @click="clear">
                 <VIcon icon="mdi-eraser" />
             </VBtn>
         </div>
         <TransitionExpand axis="x">
-            <div v-if="expanded" class="filters-fields d-flex flex-column ga-4">
+            <div v-if="expanded" class="filters-panel__fields d-flex flex-column ga-4">
                 <span class="text-subtitle-1">Фильтры</span>
 
-                <VTextField v-model="id" rounded="t-lg" label="ID" hide-details />
-                <VTextField v-model="name" rounded="t-lg" label="Фамилия пациента" hide-details />
+                <VTextField v-model="id" rounded="t-lg" label="ID" hide-details @keyup.enter="$emit('update-id', id)" />
+                <VTextField
+                    v-model="name"
+                    rounded="t-lg"
+                    label="Фамилия пациента"
+                    hide-details
+                    @keyup.enter="$emit('update-name', name)"
+                />
                 <VSelect v-model="customer" rounded="t-lg" :items="customers" label="Заказчик" hide-details clearable />
             </div>
         </TransitionExpand>
@@ -45,12 +54,6 @@ export default defineComponent({
     },
 
     watch: {
-        id(value) {
-            this.$emit("update-id", value);
-        },
-        name(value) {
-            this.$emit("update-name", value);
-        },
         customer(value) {
             this.$emit("update-customer", value);
         },
@@ -61,43 +64,45 @@ export default defineComponent({
             this.id = "";
             this.name = "";
             this.customer = null;
+            this.$emit("update-id", "");
+            this.$emit("update-name", "");
         },
     },
 });
 </script>
 
 <style lang="css" scoped>
-.main-panel {
+.filters-panel {
     width: fit-content;
     height: 118px;
     transition: height 0.3s ease-in-out;
 }
-.main-panel.expanded {
+.filters-panel--expanded {
     height: 280px;
 }
-.controls {
+.filters-panel__controls {
     flex-direction: column;
 }
-.filters-fields {
+.filters-panel__fields {
     padding: 16px;
     width: 400px;
 }
-.icon {
+.filters-panel__icon {
     transition: rotate 0.3s ease-in-out;
 }
-.icon.expanded {
+.filters-panel__icon--expanded {
     rotate: 180deg;
 }
 
 @media (width < 1024px) {
-    .main-panel {
+    .filters-panel {
         width: 100%;
         height: 64px;
     }
-    .filters-fields {
+    .filters-panel__fields {
         width: calc(100vw - 64px);
     }
-    .controls {
+    .filters-panel__controls {
         flex-direction: row;
     }
 }
