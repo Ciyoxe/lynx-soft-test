@@ -8,6 +8,7 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 
 import "vuetify/styles";
+import { ru } from "vuetify/locale";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
@@ -19,6 +20,10 @@ createApp(App)
         createVuetify({
             components,
             directives,
+            locale: {
+                locale: "ru",
+                messages: { ru },
+            },
         }),
     )
     .mount("#app");

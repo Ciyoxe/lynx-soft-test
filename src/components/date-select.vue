@@ -8,11 +8,12 @@
                     v-bind="props"
                     v-model="fromDateFormatted"
                     max-width="328px"
+                    density="compact"
                     hide-details
                     readonly
                     />
                 </template>
-                <VDatePicker v-model="from" @update:model-value="fromMenuOpen = false" />
+                <VDatePicker v-model="from" :min="min" :max="to" @update:model-value="fromMenuOpen = false" />
             </VMenu>
             
             <span>по:</span>
@@ -23,11 +24,12 @@
                     v-bind="props"
                     v-model="toDateFormatted"
                     max-width="328px"
+                    density="compact"
                     hide-details
                     readonly
                 />
             </template>
-            <VDatePicker v-model="to" @update:model-value="toMenuOpen = false" />
+            <VDatePicker v-model="to" :min="from" :max="max" @update:model-value="toMenuOpen = false" />
         </VMenu>
 
         <VBtn @click="onSelect">Выбрать</VBtn>
@@ -38,24 +40,29 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+    props: {
+        min: { type: Date, required: true },
+        max: { type: Date, required: true },
+    },
+
     emits: ["select"],
 
     data() {
         return {
-            from: null as Date | null,
+            from: this.min,
             fromMenuOpen: false,
 
-            to: null as Date | null,
+            to: this.max,
             toMenuOpen: false,
         };
     },
 
     computed: {
         fromDateFormatted() {
-            return this.from?.toLocaleDateString('RU-ru');
+            return this.from.toLocaleDateString('RU-ru');
         },
         toDateFormatted() {
-            return this.to?.toLocaleDateString('RU-ru');
+            return this.to.toLocaleDateString('RU-ru');
         },
     },
 
