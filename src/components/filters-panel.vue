@@ -97,6 +97,9 @@ export default defineComponent({
         width: 100%;
         height: 64px;
     }
+    .filters-panel--expanded {
+        height: 280px;
+    }
     .filters-panel__fields {
         width: calc(100vw - 64px);
     }
