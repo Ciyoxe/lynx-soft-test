@@ -48,7 +48,7 @@ export default defineComponent({
         max: { type: Date, required: true },
     },
 
-    emits: ["select"],
+    emits: ["update-from", "update-to"],
 
     data() {
         return {
@@ -70,7 +70,8 @@ export default defineComponent({
 
     methods: {
         onSelect() {
-            this.$emit("select", { from: this.from, to: this.to });
+            this.$emit("update-from", this.from);
+            this.$emit("update-to", this.to);
         },
     },
 });

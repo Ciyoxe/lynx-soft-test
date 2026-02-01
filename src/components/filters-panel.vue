@@ -33,7 +33,7 @@ export default defineComponent({
         customers: { type: Array as () => string[], required: true },
     },
 
-    emits: ["filter"],
+    emits: ["update-id", "update-name", "update-customer"],
 
     data() {
         return {
@@ -42,6 +42,18 @@ export default defineComponent({
             name: "",
             customer: null as string | null,
         };
+    },
+
+    watch: {
+        id(value) {
+            this.$emit("update-id", value);
+        },
+        name(value) {
+            this.$emit("update-name", value);
+        },
+        customer(value) {
+            this.$emit("update-customer", value);
+        },
     },
 
     methods: {
