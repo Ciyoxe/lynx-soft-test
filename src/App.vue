@@ -1,3 +1,6 @@
 <template>
-    <div>Hello Vue</div>
+    <div>
+        Hello Vue
+        <VBtn>Hello</VBtn>    
+    </div>
 </template>
