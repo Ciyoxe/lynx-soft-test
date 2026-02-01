@@ -3,13 +3,18 @@
         <VTable fixed-header class="table">
             <thead>
                 <tr>
-                    <th>IDS</th>
+                    <th>ID</th>
                     <th>Дата регистрации</th>
                     <th>Пациент</th>
                     <th>Заказчик</th>
                 </tr>
             </thead>
             <tbody>
+                <tr v-if="patients.length === 0">
+                    <td colspan="4" class="text-center text-medium-emphasis">
+                        {{ hasFilters ? "Нет значений по выбранным фильтрам" : "Задайте фильтр для отображения" }}
+                    </td>
+                </tr>
                 <tr
                     v-for="patient in patients"
                     :key="patient.id"
@@ -38,6 +43,7 @@ interface Patient {
 
 export default defineComponent({
     props: {
+        hasFilters: { type: Boolean, required: true },
         patients: { type: Array as () => Patient[], required: true },
     },
 });

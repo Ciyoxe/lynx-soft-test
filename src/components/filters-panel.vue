@@ -12,7 +12,7 @@
             <div v-if="expanded" class="filters-fields d-flex flex-column ga-4">
                 <span class="text-subtitle-1">Фильтры</span>
 
-                <VTextField v-model="id" rounded="t-lg" label="IDS" hide-details />
+                <VTextField v-model="id" rounded="t-lg" label="ID" hide-details />
                 <VTextField v-model="name" rounded="t-lg" label="Фамилия пациента" hide-details />
                 <VSelect v-model="customer" rounded="t-lg" :items="customers" label="Заказчик" hide-details clearable />
             </div>
